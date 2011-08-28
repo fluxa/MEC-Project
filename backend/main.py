@@ -25,6 +25,7 @@ from google.appengine.ext.webapp import util
 from admin.handlers import *
 from matrix.handlers import *
 from viewer.handlers import *
+from web.handlers import *
 
 requests = [
 	('/admin/',AdminHandler),
@@ -41,7 +42,10 @@ requests = [
 	('/matrix/saverevision/', MatrixSaveRevisionHandler),
 	('/viewer/plain/', MatrixPlainViewerHandler),
 	('/viewer/app/', MatrixAppHandler),
-	('/home/', HomeHandler)
+	('/web/', WebHomeHandler),
+	('/web/about/', WebAboutHandler),
+	('/web/theproject/', WebTheProjectHandler),
+	('/web/contact/', WebContactHandler),
 ]
 
 application = webapp.WSGIApplication(requests, debug=True)
