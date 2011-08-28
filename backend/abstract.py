@@ -17,6 +17,7 @@ class BaseHandler(webapp.RequestHandler):
         
     def writeError(self, message):
         output = {'success':'false', 'message':message}
+        self.response.out.write(json.dumps(output))
         
     def write(self, output):
         self.response.out.write(output)

@@ -23,16 +23,31 @@ package cn.bounce
 		
 		public function getMatrix(key:String, completeDelegate:Function, errorDelegate:Function):void
 		{
-			var service:NetworkService = new NetworkService("app/getmatrix/");
+			var service:NetworkService = new NetworkService("/app/getmatrix/");
 				service.addField("key", key);
 				addAndSendRequest(service, completeDelegate, errorDelegate);
 		}
 		
+		public function getRevision(key:String, completeDelegate:Function, errorDelegate:Function):void
+		{
+			var service:NetworkService = new NetworkService("/app/getrevision/");
+			service.addField("key", key);
+			addAndSendRequest(service, completeDelegate, errorDelegate);
+		}
+		
 		public function getLink(key:String, completeDelegate:Function, errorDelegate:Function):void
 		{
-			var service:NetworkService = new NetworkService("app/getlink/");
+			var service:NetworkService = new NetworkService("/app/getlink/");
 				service.addField("key", key);
 				addAndSendRequest(service, completeDelegate, errorDelegate);
+		}
+		
+		public function saveRevision(data:String, completeDelegate:Function, errorDelegate:Function):void
+		{
+			var service:NetworkService = new NetworkService("/app/saverevision/");
+			service.addField("key", UserInfo.instance().data.link.key);
+			service.addField("data", data);
+			addAndSendRequest(service, completeDelegate, errorDelegate);
 		}
 	}
 }

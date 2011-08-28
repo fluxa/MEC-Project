@@ -26,7 +26,7 @@
 		<div class="topbar"> 
 			<div class="fill"> 
 				<div class="container"> 
-					<h3><a href="../">MEC Project Admin</a></h3> 
+					<h3><a href="../">MCE Project Admin</a></h3> 
 					<ul>
 						<li><a href="../matrix/">Matrix</a></li>
 						<li><a href="../professor/">Professors</a></li>
@@ -90,7 +90,7 @@
 									<td>{{link.professor.name}}</td>
 									<td>{{link.matrix.name}}</td>
 									<td>
-										<a href="/viewer/app/?key={{link.key}}" onclick="copyToClipboard('/viewer/app/?key={{link.key}}')">Copy Link</a>
+										<a href="/viewer/app/?link_key={{link.key}}" onclick="copyToClipboard('/viewer/app/?link_key={{link.key}}')">Copy Link</a>
 									</td>
 									<td>
 										<a href="/admin/links/delete/?key={{link.key}}" onclick="return confirm('Are you sure?')">Delete</a>

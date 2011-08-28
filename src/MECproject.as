@@ -3,8 +3,11 @@ package
 	import cn.bounce.DataUtils;
 	import cn.bounce.NetworkView;
 	import cn.bounce.ServiceManager;
+	import cn.bounce.TopBar;
 	import cn.bounce.UserInfo;
 	
+	import com.adobe.serialization.json.JSON;
+	import com.adobe.serialization.json.JSONDecoder;
 	import com.bit101.components.Label;
 	import com.millermedeiros.swffit.SWFFit;
 	import com.reigndesign.network.BaseResponse;
@@ -35,15 +38,13 @@ package
 		[Embed(source="/assets/datatest.csv", mimeType="application/octet-stream")]
 		private var csvDataClazz:Class;
 		
-		[Embed(source="assets/top_bar.png")]
-		private var topBarClass:Class;
-		
-		private var topBarBData:BitmapData;
-		
 		private var _resizeTimer:Timer;
 		private var _nview:NetworkView;
 		
 		private var margin:Number = 10;
+		private var data:Object;
+		
+		private var topBar:TopBar;
 		
 		public function MECproject()
 		{
@@ -52,23 +53,51 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.addEventListener(Event.RESIZE, onStageResize);
 			
-			var topBarBitmap:Bitmap = new topBarClass();
-			topBarBData = topBarBitmap.bitmapData;
-			topBarBitmap = null;
-			
 			//check FlashVars
-			NetworkService.Gateway 			= loaderInfo.parameters.gateway 	? loaderInfo.parameters.gateway 	: "http://localhost:8087/";
-			UserInfo.instance().user_key 	= loaderInfo.parameters.user_key	? loaderInfo.parameters.user_key 	: "";
-			UserInfo.instance().matrix_key	= loaderInfo.parameters.matrix_key	? loaderInfo.parameters.matrix_key	: "ag9kZXZ-bWVjcHJveWVjdG9yDAsSBk1hdHJpeBgEDA";
+			if(loaderInfo.parameters.data)
+			{
+				data = JSON.decode(loaderInfo.parameters.data);
+			}
 			
-			ServiceManager.instance().getMatrix(UserInfo.instance().matrix_key, onGetMatrixComplete, onError);
-			
+			if(data)
+			{
+				NetworkService.Gateway 	= data.gateway;
+				if(data.matrix_key)
+				{
+					//viewer session
+					ServiceManager.instance().getMatrix(data.matrix_key, onGetMatrixComplete, onError);
+				}
+				if(data.revision_key)
+				{
+					//viewer session
+					ServiceManager.instance().getRevision(data.revision_key, onGetMatrixComplete, onError);
+				}
+				else if(data.link_key)
+				{
+					//professor edit session
+					ServiceManager.instance().getLink(data.link_key, onGetLinkComplete, onError);
+				}
+			}
+			else
+			{
+				//debug
+				new Label(this, 50, 5, "Debug Session", 20, 0xffffff);
+				NetworkService.Gateway = "http://localhost:8087";
+				var matrix_key:String = "ag9kZXZ-bWVjcHJveWVjdG9yDAsSBk1hdHJpeBgBDA";
+				ServiceManager.instance().getMatrix(matrix_key, onGetMatrixComplete, onError);
+			}
 			
 		}
 		
 		private function onGetMatrixComplete(response:BaseResponse):void
 		{
-			UserInfo.instance().matrix_data = DataUtils.CSVtoJson(String(response.data));
+			UserInfo.instance().data = response.data;
+			onStageResize();
+		}
+		
+		private function onGetLinkComplete(response:BaseResponse):void
+		{
+			UserInfo.instance().data = response.data;
 			onStageResize();
 		}
 		
@@ -98,23 +127,28 @@ package
 		{
 			_resizeTimer.removeEventListener(TimerEvent.TIMER, onResizeTimerComplete);
 			_resizeTimer = null;
-			//SWFFit.fit("flashContent", stage.stageWidth, stage.stageHeight);
+			
 			if(_nview)
 			{
 				_nview.destroy();
 				removeChild(_nview);
 				_nview = null;
-				
 			}
 			
-			//topbar
-			graphics.beginBitmapFill(topBarBData, new Matrix(), true, false);
-			graphics.drawRect(0,0,stage.stageWidth,topBarBData.height);
+			if(topBar)
+			{
+				removeChild(topBar);
+				topBar.destroy();
+				topBar = null;
+			}
 			
-			_nview = new NetworkView(UserInfo.instance().matrix_data, new Rectangle(margin,topBarBData.height+margin,stage.stageWidth-margin*2,stage.stageHeight-(topBarBData.height+margin)));
+			topBar = new TopBar();
+			addChild(topBar);
+			
+			var data:String = DataUtils.CSVtoJson(UserInfo.instance().data.matrix.data);
+			_nview = new NetworkView(data, new Rectangle(margin,topBar.h+margin,stage.stageWidth-margin*2,stage.stageHeight-(topBar.h+margin)),topBar);
 			addChild(_nview);
 			
-			trace("resized " + stage.stageWidth + " - " + stage.stageHeight);
 		}
 	}
 }

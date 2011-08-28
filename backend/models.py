@@ -14,12 +14,12 @@ class Matrix(db.Model):
     created = db.DateTimeProperty()
     notes = db.TextProperty()
     
-class Revision(db.Model):
-    original = db.ReferenceProperty(Matrix)
-    edited = db.TextProperty()
-    when = db.DateTimeProperty()
-    who = db.ReferenceProperty(Professor)
-
 class Link(db.Model):
     matrix = db.ReferenceProperty(Matrix)
     professor = db.ReferenceProperty(Professor)
+    
+class Revision(db.Model):
+    data = db.BlobProperty()
+    link = db.ReferenceProperty(Link)
+    created = db.DateTimeProperty(auto_now_add=True)
+    last_modified = db.DateTimeProperty(auto_now=True)

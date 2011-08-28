@@ -4,7 +4,7 @@ import abstract
 import utils
 import logging
 import csv
-
+from django.utils import simplejson as json
 from datetime import *
 from models import *
 from urlparse import urlparse
@@ -16,16 +16,24 @@ class MatrixAppHandler(abstract.BaseHandler):
     def get(self):
         
         url = urlparse(self.request.url)
-        gateway = str('%s://%s/'%(url.scheme,url.netloc))
+        gateway = str('%s://%s'%(url.scheme,url.netloc))
         
-        if(self.request.get('matrix_key')):
-            matrix_key = self.request.get('matrix_key')
-            user_key = self.request.get('user_key')
-            self.render_template('viewer/app.html',{'GATEWAY':gateway,'MATRIX_KEY':matrix_key,'USER_KEY':user_key})
+        if(self.request.get('matrix_key') or self.request.get('link_key') or self.request.get('revision_key')):
+            
+            data = {'gateway':gateway}
+            
+            if self.request.get('link_key'):
+                data['link_key'] = self.request.get('link_key')
+            elif self.request.get('revision_key'):
+                data['revision_key'] = self.request.get('revision_key')
+            elif self.request.get('matrix_key'):
+                data['matrix_key'] = self.request.get('matrix_key')
+            
+            self.render_template('viewer/app.html',{'data':json.dumps(data)})
             
         else:
             
-            self.write('missing parameter matrix_key')
+            self.write('missing parameters link_key or matrix_key')
 
 class MatrixPlainViewerHandler(abstract.BaseHandler):
     def get(self):

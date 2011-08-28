@@ -43,6 +43,10 @@ package com.bit101.components
 		protected var _text:String = "";
 		protected var _tf:TextField;
 		
+		private var _size:int;
+		private var _color:uint;
+		private var _hasCustomStyle:Boolean;
+		
 		/**
 		 * Constructor
 		 * @param parent The parent DisplayObjectContainer on which to add this Label.
@@ -50,10 +54,19 @@ package com.bit101.components
 		 * @param ypos The y position to place this component.
 		 * @param text The string to use as the initial text in this component.
 		 */
-		public function Label(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0, text:String = "")
+		public function Label(parent:DisplayObjectContainer = null, xpos:Number = 0, ypos:Number =  0, text:String = "", size:int=0, color:uint=0x000001)
 		{
 			this.text = text;
+			
+			_size = size>0 ? size : Style.fontSize;
+			if(color != 0x000001)
+			{
+				this._color = color;
+				this._hasCustomStyle = true;
+			}
+			
 			super(parent, xpos, ypos);
+			
 		}
 		
 		/**
@@ -80,7 +93,7 @@ package com.bit101.components
 			_tf.sharpness = 50;
 			_tf.selectable = false;
 			_tf.mouseEnabled = false;
-			_tf.defaultTextFormat = new TextFormat(Style.fontName, Style.fontSize, Style.LABEL_TEXT);
+			_tf.defaultTextFormat = new TextFormat(Style.fontName, _size, _hasCustomStyle?_color:Style.LABEL_TEXT);
 			_tf.text = _text;			
 			addChild(_tf);
 			draw();

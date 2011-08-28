@@ -4,9 +4,8 @@ package cn.bounce
 	{
 		private static var _instance:UserInfo;
 		
-		public var user_key:String;
-		public var matrix_key:String;
-		public var matrix_data:String;
+		public var data:Object;
+		
 		
 		public function UserInfo()
 		{
