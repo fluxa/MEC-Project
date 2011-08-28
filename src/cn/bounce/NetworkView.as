@@ -5,16 +5,21 @@ package cn.bounce
 	import com.bit101.components.ProgressBar;
 	import com.bit101.components.Text;
 	import com.bit101.components.TextArea;
+	import com.reigndesign.network.BaseResponse;
 	
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
 	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.sensors.Accelerometer;
 	import flash.text.TextFormat;
+	import flash.utils.Timer;
+	
+	import org.osmf.events.TimeEvent;
 
 	public class NetworkView extends Sprite
 	{
@@ -37,14 +42,18 @@ package cn.bounce
 		private var _nodeStartDragging:Boolean;
 		private var _nodeDidDrag:Boolean;
 		
+		private var _topBar:TopBar;
+		private var _saveTimer:Timer;
+		private var _willSave:Boolean;
 		
-		public function NetworkView(jsonStr:String, bounds:Rectangle)
+		public function NetworkView(jsonStr:String, bounds:Rectangle, topBar:TopBar)
 		{
 			super();
 			
 			
 			_jsonStr = jsonStr;
 			_bounds = bounds;
+			_topBar = topBar;
 			_connEditWidget = [];
 			_conns = [];
 			_connAtoN = {};
@@ -470,8 +479,48 @@ package cn.bounce
 			}
 			
 			//avoid unselect node
-			e.stopImmediatePropagation();
-			trace(DataUtils.JsonToCSV(_data));
+			//e.stopImmediatePropagation();
+			//hideConnectorControls();
+			//showConnectorControlsFor(fromK);
+			
+			//save progress
+			if(UserInfo.instance().data)
+			{
+				if(_saveTimer)
+				{
+					_saveTimer.reset();
+				}
+				else
+				{
+					_saveTimer = new Timer(1000, 1);
+					_saveTimer.addEventListener(TimerEvent.TIMER, onSaveTimerComplete);
+				}
+				
+				_saveTimer.start();
+				_willSave = true;
+			}
+		}
+		
+		private function onSaveTimerComplete(e:TimerEvent):void
+		{
+			_saveTimer.removeEventListener(TimerEvent.TIMER, onSaveTimerComplete);
+			_saveTimer = null;
+			_willSave = false;
+			
+			var revision:String = DataUtils.JsonToCSV(_data);
+			ServiceManager.instance().saveRevision(revision, onSaveRevisionComplete, onSaveRevisionError);
+			_topBar.loading();
+		}
+		
+		private function onSaveRevisionComplete(response:BaseResponse):void
+		{
+			_topBar.stop();
+		}
+		
+		private function onSaveRevisionError(message:String):void
+		{
+			_topBar.stop();
+			trace(message);
 		}
 		
 	}

@@ -87,17 +87,16 @@ class AdminMatrixAddHandler(abstract.BaseHandler):
             self.response.out.write("Missing data")
             
             
-        
-        
-class AdminModelDeleteHandler(abstract.BaseHandler):
+class AdminEntityDeleteHandler(abstract.BaseHandler):
+    def post(self):
+        self.get()
+
     def get(self):
-        key = self.request.get('key')
-        if key != '':
-            db.delete(key)
-            self.redirect(self.request.headers['REFERER'])
-            self.response.out.write("OK")
-        else:
-            self.response.out.write("Missing key")
+
+        if self.request.get('key'):
+            db.delete(self.request.get('key'))
+
+        self.redirect(self.request.headers['REFERER'])
             
 class AdminLinksHandler(abstract.BaseHandler):
     def get(self):
@@ -130,14 +129,12 @@ class AdminLinksAddHandler(abstract.BaseHandler):
                 link.put()
             
             self.redirect('/admin/links/?success=1')
-    
-class AdminLinksDeleteHandler(abstract.BaseHandler):
+        
+class AdminRevisionsHandler(abstract.BaseHandler):
     def post(self):
         self.get()
-        
+    
     def get(self):
+        revisions = Revision.all().fetch(100)
+        self.render_template('admin/revisions.html',{'revisions':revisions})
         
-        if(self.request.get('key')):
-            db.delete(self.request.get('key'))
-        
-        self.redirect(self.request.headers['REFERER'])
