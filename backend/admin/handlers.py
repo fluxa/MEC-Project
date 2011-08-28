@@ -132,5 +132,12 @@ class AdminLinksAddHandler(abstract.BaseHandler):
             self.redirect('/admin/links/?success=1')
     
 class AdminLinksDeleteHandler(abstract.BaseHandler):
+    def post(self):
+        self.get()
+        
     def get(self):
-        logging.info('a')
+        
+        if(self.request.get('key')):
+            db.delete(self.request.get('key'))
+        
+        self.redirect(self.request.headers['REFERER'])

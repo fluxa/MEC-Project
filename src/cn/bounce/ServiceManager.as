@@ -23,7 +23,14 @@ package cn.bounce
 		
 		public function getMatrix(key:String, completeDelegate:Function, errorDelegate:Function):void
 		{
-			var service:NetworkService = new NetworkService("matrix/get/");
+			var service:NetworkService = new NetworkService("app/getmatrix/");
+				service.addField("key", key);
+				addAndSendRequest(service, completeDelegate, errorDelegate);
+		}
+		
+		public function getLink(key:String, completeDelegate:Function, errorDelegate:Function):void
+		{
+			var service:NetworkService = new NetworkService("app/getlink/");
 				service.addField("key", key);
 				addAndSendRequest(service, completeDelegate, errorDelegate);
 		}

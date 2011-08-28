@@ -11,25 +11,25 @@ class WebHomeHandler(abstract.BaseHandler):
         self.get()
         
     def get(self):
-        self.render_template('web/home.html')
+        self.render_template('web/home.html',{})
         
 class WebAboutHandler(abstract.BaseHandler):
     def post(self):
         self.get()
 
     def get(self):
-        self.render_template('web/about.html')
+        self.render_template('web/about.html',{})
         
 class WebTheProjectHandler(abstract.BaseHandler):
     def post(self):
         self.get()
 
     def get(self):
-        self.render_template('web/theproject.html')
+        self.render_template('web/theproject.html',{})
 
 class WebContactHandler(abstract.BaseHandler):
     def post(self):
         self.get()
 
     def get(self):
-        self.render_template('web/contact.html')
+        self.render_template('web/contact.html',{})

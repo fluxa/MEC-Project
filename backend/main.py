@@ -23,7 +23,7 @@ sys.path.append(lib)
 from google.appengine.ext import webapp
 from google.appengine.ext.webapp import util
 from admin.handlers import *
-from matrix.handlers import *
+from app.handlers import *
 from viewer.handlers import *
 from web.handlers import *
 
@@ -38,8 +38,9 @@ requests = [
 	('/admin/links/', AdminLinksHandler),
 	('/admin/links/add/', AdminLinksAddHandler),
 	('/admin/links/delete/', AdminLinksDeleteHandler),
-	('/matrix/get/', MatrixGetHandler),
-	('/matrix/saverevision/', MatrixSaveRevisionHandler),
+	('/app/getmatrix/', AppGetMatrixHandler),
+	('/app/saverevision/', AppSaveRevisionHandler),
+	('/app/getlink/', AppGetLinkHandler),
 	('/viewer/plain/', MatrixPlainViewerHandler),
 	('/viewer/app/', MatrixAppHandler),
 	('/web/', WebHomeHandler),
