@@ -1,0 +1,47 @@
+package com.reigndesign.components
+{
+	import aw.projects.assetmodifier.ModifierManager;
+	import aw.projects.assetmodifier.modifiers.AssetStopModifier;
+	
+	import com.reigndesign.models.Land;
+	
+	import flash.display.MovieClip;
+	import flash.geom.Rectangle;
+	import flash.text.TextField;
+
+	[Embed('assets/swf/assets.swf#LandBtn')]
+	public class LandButton extends flash.display.MovieClip
+	{
+		public var bg:MovieClip;
+		public var name_txt:TextField;
+		public var land:Land;
+		
+		public function LandButton()
+		{
+			stop();
+		}
+		
+		public function setText(t:String):void {
+			this.name_txt.text = t;
+		}
+		
+		public function setRectangle(rect:Rectangle):void
+		{
+			bg.width = name_txt.width = rect.width;
+			bg.height = name_txt.height = rect.height;
+			this.x = rect.x;
+			this.y = rect.y;
+		}
+		
+		public function select():void
+		{
+			bg.alpha = 0.5;
+		}
+		
+		public function unselect():void
+		{
+			bg.alpha = 1;
+		}
+		
+	}
+}

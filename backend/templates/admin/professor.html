@@ -1,0 +1,108 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="utf-8"> 
+		<title>MEC Project</title> 
+		<meta name="description" content=""> 
+		<meta name="author" content="JM Fluxà"> 
+ 
+		<!-- Le HTML5 shim, for IE6-8 support of HTML elements --> 
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]--> 
+ 
+		<!-- Le styles --> 
+		<link href="/css/bootstrap-1.1.1.css" rel="stylesheet"> 
+ 
+		<!-- Le fav and touch icons --> 
+		<link rel="shortcut icon" href="/image/favicon.ico"> 
+		<link rel="apple-touch-icon" href="/image/apple-touch-icon.png"> 
+		<link rel="apple-touch-icon" sizes="72x72" href="/image/apple-touch-icon-72x72.png"> 
+		<link rel="apple-touch-icon" sizes="114x114" href="/image/apple-touch-icon-114x114.png"> 
+	</head> 
+	
+	<body style='padding-top: 40px;'> 
+		
+		<div class="topbar"> 
+			<div class="fill"> 
+				<div class="container"> 
+					<h3><a href="../">MEC Project Admin</a></h3> 
+					<ul>
+						<li><a href="../matrix/">Matrix</a></li>
+						<li class="active"><a href="../professor/">Professors</a></li>
+						<li><a href="../links/">Links</a></li>
+						<li><a href="../revisions/">Revisions</a></li> 
+					</ul> 
+				</div> 
+			</div> 
+		</div> 
+		
+		<div class="container"> 
+			<div class="row">
+				<div class="span5">
+					<h2>Add</h2>
+					<p>
+						<form action="/admin/professor/add/" method="POST" class="form-stacked">
+							<div class="clearfix">
+								<label for="name">Name</label>
+								<input name="name" type="text" id="name"/>
+							</div>
+							<div class="clearfix">
+								<label for="field">Field</label>
+								<input name="field" type="text" id="field"/>
+							</div>
+							<div class="clearfix">
+								<label for="university">University</label>
+								<input name="university" type="text" id="university"/>
+							</div>
+							<div class="clearfix">
+								<label for="department">Department</label>
+								<input name="department" type="text" id="department"/>
+							</div>
+							<div class="clearfix">
+								<label for="country">Country</label>
+								<input name="country" type="text" id="country"/>
+							</div>
+							<div class="actions"> 
+								<button type="submit" class="btn primary">Submit</button>
+							</div>
+						</form>
+					</p>
+				</div>
+			
+				<div class="span10 columns offset1">
+					<h2>List</h2>
+					<p>
+						<table>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Field</th>
+									<th>University</th>
+									<th>Department</th>
+									<th>Country</th>
+								</tr>
+							</thead>
+							<tbody>
+								{%for professor in professors %}
+								<tr>
+									<td>{{professor.name}}</td>
+									<td>{{professor.field}}</td>
+									<td>{{professor.university}}</td>
+									<td>{{professor.department}}</td>
+									<td>{{professor.country}}</td>
+									<td><a href="/admin/professor/delete/?key={{professor.key}}" onclick="return confirm('Are you sure?')">Delete</a></td>
+								</tr>
+								{% endfor %}
+							<tbody>
+						</table>
+					</p>
+				</div
+			</div>
+			
+		
+			
+		</div> <!-- /container --> 
+		
+	</body> 
+</html>

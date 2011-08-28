@@ -1,0 +1,16 @@
+package com.reigndesign.components
+{
+	import flash.display.MovieClip;
+	
+	[Embed('/assets/swf/SSPreloaderBG.swf#Loader')]
+	public class SSPreloaderBG extends MovieClip
+	{
+		public var loadingBar:MovieClip;
+		
+		public function SSPreloaderBG()
+		{
+			super();
+			loadingBar.scaleX = 0;
+		}
+	}
+}

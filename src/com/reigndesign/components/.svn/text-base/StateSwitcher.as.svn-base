@@ -1,0 +1,32 @@
+package com.reigndesign.components
+{
+	import com.reigndesign.GameG;
+	import com.reigndesign.models.Land;
+	
+	import flash.display.MovieClip;
+	
+	[Embed('assets/swf/assets.swf#StateSwitcher')]
+	public class StateSwitcher extends MovieClip
+	{
+		private var states:Array;
+		private var _selected:Land;
+		
+		public function StateSwitcher()
+		{
+			super();
+			states = GameG.dataDictionary[got2bAppMain.States_Key];
+		}
+		
+		public function switchTo(land:Land):void
+		{
+			var count:int = states.length;
+			this.gotoAndStop(land.id+1);
+			_selected = land;
+		}
+		
+		public function getSelectedLand():Land
+		{
+			return _selected;
+		}
+	}
+}

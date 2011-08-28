@@ -1,0 +1,18 @@
+package com.reigndesign.components
+{
+	import flash.display.MovieClip;
+	import flash.text.TextField;
+	
+	[Embed('/assets/swf/assets.swf#RangItem')]
+	public class RankItem extends MovieClip
+	{
+		public var txtLabel1:TextField;
+		public var txtLabel2:TextField;
+		
+		public function RankItem()
+		{
+			super();
+			txtLabel1.text = txtLabel2.text = "";
+		}
+	}
+}

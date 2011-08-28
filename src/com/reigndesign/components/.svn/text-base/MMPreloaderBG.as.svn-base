@@ -1,0 +1,16 @@
+package com.reigndesign.components
+{
+	import flash.display.MovieClip;
+	
+	[Embed('/assets/swf/MMPreloaderBG.swf#Loader')]
+	public class MMPreloaderBG extends MovieClip
+	{
+		public var loadingBar:MovieClip;
+		
+		public function MMPreloaderBG()
+		{
+			super();
+			loadingBar.scaleX = 0;
+		}
+	}
+}

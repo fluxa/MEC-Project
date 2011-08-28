@@ -1,0 +1,55 @@
+package com.reigndesign.components
+{
+	import flash.display.Bitmap;
+	import flash.display.Loader;
+	import flash.display.LoaderInfo;
+	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.events.IOErrorEvent;
+	import flash.net.URLLoader;
+	import flash.net.URLRequest;
+	import flash.system.LoaderContext;
+	import flash.text.TextField;
+	
+	[Embed('/assets/swf/assets.swf#RankingItem')]
+	public class RankingItem extends MovieClip
+	{
+		public var icon:MovieClip;
+		public var txtLabel:TextField;
+		public var txtTopScore:TextField;
+		public var txtCummuScore:TextField;
+		
+		private var loader:Loader;
+		
+		public function RankingItem()
+		{
+			super();
+		}
+		
+		public function setIconURL(url:String):void
+		{
+			loader = new Loader();
+			
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoaderComplete);
+			
+			var lc:LoaderContext = new LoaderContext();
+			lc.checkPolicyFile = false;
+			loader.load(new URLRequest(url), lc);
+			
+			icon.addChild(loader);
+			
+		}
+		
+		protected function onLoaderComplete(e:Event):void
+		{
+			trace("load image complete");
+			var loaderInfo:LoaderInfo = e.target as LoaderInfo;
+			loaderInfo.removeEventListener(Event.COMPLETE, onLoaderComplete);
+			
+			if(loaderInfo.width > 27 || loaderInfo.height > 27)
+			{
+				loader.width = loader.height = 27;
+			}
+		}
+	}
+}

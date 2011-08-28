@@ -1,0 +1,101 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+	<head> 
+		<meta charset="utf-8"> 
+		<title>MEC Project</title> 
+		<meta name="description" content=""> 
+		<meta name="author" content="JM Fluxà"> 
+ 
+		<!-- Le HTML5 shim, for IE6-8 support of HTML elements --> 
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]--> 
+ 
+		<!-- Le styles --> 
+		<link href="/css/bootstrap-1.1.1.css" rel="stylesheet"> 
+ 
+		<!-- Le fav and touch icons --> 
+		<link rel="shortcut icon" href="/image/favicon.ico"> 
+		<link rel="apple-touch-icon" href="/image/apple-touch-icon.png"> 
+		<link rel="apple-touch-icon" sizes="72x72" href="/image/apple-touch-icon-72x72.png"> 
+		<link rel="apple-touch-icon" sizes="114x114" href="/image/apple-touch-icon-114x114.png"> 
+	</head> 
+	
+	<body style='padding-top: 40px;'> 
+		
+		<div class="topbar"> 
+			<div class="fill"> 
+				<div class="container"> 
+					<h3><a href="../">MEC Project Admin</a></h3> 
+					<ul>
+						<li class="active"><a href="../matrix/">Matrix</a></li>
+						<li><a href="../professor/">Professors</a></li>
+						<li><a href="../links/">Links</a></li>
+						<li><a href="../revisions/">Revisions</a></li> 
+					</ul> 
+				</div> 
+			</div> 
+		</div> 
+		
+		<div class="container"> 
+			<div class="row">
+				<div class="span5">
+					<h2>Add</h2>
+					<p>
+						<form action="/admin/matrix/add/" method="POST" enctype="multipart/form-data" class="form-stacked">
+							<div class="clearfix">
+								<label for="name">Name</label>
+								<input name="name" type="text" id="name"/>
+							</div>
+							<div class="clearfix">
+								<label for="notes">Notes</label>
+								<textarea name="notes" id="notes"></textarea>
+							</div>
+							<div class="clearfix">
+								<label for="data">CSV File</label>
+								<input name="data" type="file" id="data"/>
+							</div>
+							<div class="actions"> 
+								<button type="submit" class="btn primary">Submit</button>
+							</div>
+						</form>
+					</p>
+				</div>
+			
+				<div class="span10 columns offset1">
+					<h2>List</h2>
+					<p>
+						<table>
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>File Name</th>
+									<th>Notes</th>
+									<th>Data</th>
+								</tr>
+							</thead>
+							<tbody>
+								{%for matrix in matrices %}
+								<tr>
+									<td>{{matrix.name}}</td>
+									<td>{{matrix.filename}}</td>
+									<td>{{matrix.notes}}</td>
+									<td>
+										<a href="/matrix/get/?key={{matrix.key}}&plain=1">raw</a>
+										<a href="/viewer/app/?matrix_key={{matrix.key}}">view</a>
+									</td>
+									<td><a href="/admin/matrix/delete/?key={{matrix.key}}" onclick="return confirm('Are you sure?')">Delete</a></td>
+								</tr>
+								{% endfor %}
+							<tbody>
+						</table>
+					</p>
+				</div
+			</div>
+			
+		
+			
+		</div> <!-- /container --> 
+		
+	</body> 
+</html>

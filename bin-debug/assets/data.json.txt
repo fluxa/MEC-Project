@@ -1,0 +1,44 @@
+[
+    {
+        "name": "fish",
+        "eat": [
+            
+        ] 
+    },
+    {
+        "name": "bird",
+        "eat": [
+            "fish" 
+        ] 
+    },
+    {
+        "name": "cat",
+        "eat": [
+            "bird",
+            "fish" 
+        ] 
+    },
+    {
+        "name": "dog",
+        "eat": [
+            "cat" 
+        ] 
+    },
+    {
+        "name": "lion",
+        "eat": [
+            "fish",
+            "bird",
+            "cat",
+            "dog" 
+        ] 
+    },
+    {
+        "name": "dinosaur",
+        "eat": [
+            "cat",
+            "dog",
+            "lion" 
+        ] 
+    }
+]

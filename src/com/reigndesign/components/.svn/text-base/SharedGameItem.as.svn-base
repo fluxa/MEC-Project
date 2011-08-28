@@ -1,0 +1,101 @@
+package com.reigndesign.components
+{
+	import com.reigndesign.GameG;
+	import com.reigndesign.models.GameInfo;
+	import com.reigndesign.models.SharedGameInfo;
+	import com.reigndesign.states.BCLoader;
+	import com.reigndesign.states.MMLoader;
+	import com.reigndesign.states.SSLoader;
+	
+	import flash.display.Loader;
+	import flash.display.LoaderInfo;
+	import flash.display.MovieClip;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.net.URLRequest;
+	import flash.system.LoaderContext;
+	import flash.text.TextField;
+	
+	[Embed('assets/swf/assets.swf#SharedGameItem')]
+	public class SharedGameItem extends MovieClip
+	{
+		public var icon:MovieClip;
+		public var txtLabel:TextField;
+		public var txtBaseScore:TextField;
+		public var btPlay:MovieClip;
+		
+		private var gameInfo:SharedGameInfo;
+		
+		private var loader:Loader;
+		
+		public function SharedGameItem(sharedGameInfo:SharedGameInfo)
+		{
+			super();
+			this.gameInfo = sharedGameInfo;
+			
+			txtLabel.text = gameInfo.host.name;
+			txtBaseScore.text = gameInfo.baseScore.toString();
+			
+			btPlay.addEventListener(MouseEvent.CLICK, onPlayButtonClick);
+			
+			setIconURL(gameInfo.host.profilePhoto);
+			
+		}
+		
+		public function setIconURL(url:String):void
+		{
+			loader = new Loader();
+			
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, onLoaderComplete);
+			
+			var lc:LoaderContext = new LoaderContext();
+			lc.checkPolicyFile = false;
+			loader.load(new URLRequest(url), lc);
+			
+			icon.addChild(loader);
+			
+		}
+		
+		protected function onLoaderComplete(e:Event):void
+		{
+			var loaderInfo:LoaderInfo = e.target as LoaderInfo;
+			loaderInfo.removeEventListener(Event.COMPLETE, onLoaderComplete);
+			
+			if(loaderInfo.width > 27 || loaderInfo.height > 27)
+			{
+				loader.width = loader.height = 27;
+			}
+		}
+		
+		private function onPlayButtonClick(e:MouseEvent):void
+		{
+			var game:GameInfo = new GameInfo(true, gameInfo.gameIndex);
+				game.sharedGameInfo = gameInfo;
+			
+			GameG.dataDictionary[got2bAppMain.GameInfo_Key] = game;
+			
+			var gameState:BaseState;
+			
+			switch(gameInfo.gameIndex)
+			{
+				case 1:
+					gameState = new SSLoader();
+					break;
+				
+				case 2:
+					gameState = new MMLoader();
+					break;
+				
+				case 3:
+					gameState = new BCLoader();
+					break;
+					
+			}
+			
+			gameState.baseScore = game.sharedGameInfo.baseScore;
+			GameG.state = gameState;
+		}
+		
+		
+	}
+}
