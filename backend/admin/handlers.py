@@ -105,6 +105,11 @@ class AdminLinksHandler(abstract.BaseHandler):
         professors = Professor.all().fetch(100)
         matrixes = Matrix.all().fetch(100)
         links = Link.all().fetch(100)
+        
+        
+        if(self.request.get('success')):
+            success = self.request.get('success')
+            
         self.render_template('admin/links.html', {'professors':professors,'matrixes':matrixes,'links':links})
         
 class AdminLinksAddHandler(abstract.BaseHandler):
@@ -124,7 +129,7 @@ class AdminLinksAddHandler(abstract.BaseHandler):
                 link.matrix = matrix
                 link.put()
             
-            self.redirect('/admin/links/')
+            self.redirect('/admin/links/?success=1')
     
 class AdminLinksDeleteHandler(abstract.BaseHandler):
     def get(self):
