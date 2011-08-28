@@ -40,7 +40,8 @@ requests = [
 	('/matrix/get/', MatrixGetHandler),
 	('/matrix/saverevision/', MatrixSaveRevisionHandler),
 	('/viewer/plain/', MatrixPlainViewerHandler),
-	('/viewer/app/', MatrixAppHandler)
+	('/viewer/app/', MatrixAppHandler),
+	('/home/', HomeHandler)
 ]
 
 application = webapp.WSGIApplication(requests, debug=True)
