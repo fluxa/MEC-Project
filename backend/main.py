@@ -45,6 +45,7 @@ requests = [
 	('/app/getlink/', AppGetLinkHandler),
 	('/app/getrevision/', AppGetRevisionHandler),
 	('/viewer/plain/', MatrixPlainViewerHandler),
+	('/viewer/raw/', MatrixRawViewerHandler),
 	('/viewer/app/', MatrixAppHandler),
 	('/web/', WebHomeHandler),
 	('/web/about/', WebAboutHandler),
