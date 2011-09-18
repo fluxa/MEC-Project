@@ -12,7 +12,7 @@
 		<![endif]--> 
  
 		<!-- Le styles --> 
-		<link href="/css/bootstrap-1.1.1.css" rel="stylesheet"> 
+		<link href="/css/bootstrap.css" rel="stylesheet"> 
  
 		<!-- Le fav and touch icons --> 
 		<link rel="shortcut icon" href="/image/favicon.ico"> 
@@ -29,7 +29,7 @@
 					<h3><a href="../">MCE Project Admin</a></h3> 
 					<ul>
 						<li><a href="../matrix/">Matrix</a></li>
-						<li><a href="../professor/">Professors</a></li>
+						<li><a href="../professor/">Experts</a></li>
 						<li><a href="../links/">Links</a></li>
 						<li class="active"><a href="../revisions/">Revisions</a></li> 
 					</ul> 
@@ -57,7 +57,8 @@
 									<td>{{revision.link.professor.name}}</td>
 									<td>{{revision.link.matrix.name}}</td>
 									<td>
-										<a href="/viewer/app/?revision_key={{revision.key}}" onclick="copyToClipboard('/viewer/app/?revision_key={{revision.key}}')">Copy Link</a>
+										<a href="/viewer/app/?revision_key={{revision.key}}" onclick="copyToClipboard('/viewer/app/?revision_key={{revision.key}}')"><span>Link</span></a>
+										<a href="/viewer/raw/?key={{revision.key}}&kind=rev"><span>Raw</span></a>
 									</td>
 									<td>{{revision.last_modified}}</td>
 									<td>
