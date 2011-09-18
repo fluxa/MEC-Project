@@ -51,7 +51,17 @@ class MatrixRawViewerHandler(abstract.BaseHandler):
     def get(self):
         if(self.request.get('key')):
             key = db.Key(self.request.get('key'))
-            matrix = Matrix.get(key)
+            kind = self.request.get('kind')
+            
+            filename = ''
+            data = None
+            if kind == 'matrix':
+                data = Matrix.get(key)
+                filename = data.filename
+            elif kind == 'rev':
+                data = Revision.get(key)
+                filename = 'revision_'+data.link.professor.name.replace(' ','-')+'.csv'
+                
             self.response.headers['Content-Type'] = 'text/csv'
-            self.response.headers['Content-Disposition'] = "attachment; filename="+matrix.filename
-            self.response.out.write(str(matrix.data))
+            self.response.headers['Content-Disposition'] = "attachment; filename="+filename
+            self.response.out.write(str(data.data))
