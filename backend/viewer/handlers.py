@@ -53,5 +53,5 @@ class MatrixRawViewerHandler(abstract.BaseHandler):
             key = db.Key(self.request.get('key'))
             matrix = Matrix.get(key)
             self.response.headers['Content-Type'] = 'text/csv'
-            self.response.headers['Content-Disposition'] = "attachment; filename="+matrix.filename+".csv"
+            self.response.headers['Content-Disposition'] = "attachment; filename="+matrix.filename
             self.response.out.write(str(matrix.data))
