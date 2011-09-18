@@ -78,10 +78,7 @@ class WebContactHandler(abstract.BaseHandler):
         
         if success:
             
-            mail.send_mail(sender="MCE Contact <info@mceproject.com>",
-                          to="Antonio Tironi <jmfluxa@gmail.com>",
-                          subject="Contact from: "+name,
-                          body="""
+            body = """
             Contact information:
 
             name: [NAME]
@@ -89,8 +86,18 @@ class WebContactHandler(abstract.BaseHandler):
             institution = [INSTITUTION]
             department = [DEPARTMENT]
             country = [COUNTRY]
+
+            """
+            body.replace('[NAME]',name)
+            body.replace('[EMAIL]',email)
+            body.replace('[INSTITUTION]',institution)
+            body.replace('[DEPARTMENT]',department)
+            body.replace('[COUNTRY]',country)
             
-            """)
+            mail.send_mail(sender="MCE Contact <juanclaudiolopez@gmail.com>",
+                          to="Antonio Tironi <tironi@gmail.com>",
+                          subject="Contact from: "+name,
+                          body=body)
             
             message = 'Your message has been sent. We will contact you shortly.'
             name = ''
