@@ -12,10 +12,12 @@
     <![endif]-->
 
 	<!-- Le javascript --> 
+	<script src="/js/jquery.js"></script>
 	<script src="/js/bootstrap-alerts.js"></script>
+	<script src="/js/bootstrap-modal.js"></script>
 	
     <!-- Le styles -->
-    <link href="/css/bootstrap.css" rel="stylesheet">
+	<link href="/css/bootstrap.css" rel="stylesheet">
 	<link href="/css/frodo.css" rel="stylesheet">
 
     <!-- Le fav and touch icons -->
@@ -35,7 +37,7 @@
             <li><a href="../">Home</a></li>
             <li><a href="../about/">About</a></li>
             <li><a href="../theproject/">The Project</a></li>
-            <li class="active"><a href="contact/">Contact</a></li>
+            <li class="active"><a href="../contact/">Contact</a></li>
           </ul>
         </div>
       </div>
@@ -51,23 +53,23 @@
 						<form action="../contact/" method="POST" class="form-stacked">
 							<div class="clearfix">
 								<label for="name">Name</label>
-								<input name="name" type="text" id="name"/>
+								<input name="name" type="text" id="name" value="{{obj.data.name}}"/>
 							</div>
 							<div class="clearfix">
 								<label for="email">Email</label>
-								<input name="email" type="text" id="email"/>
+								<input name="email" type="text" id="email" value="{{obj.data.email}}"/>
 							</div>
 							<div class="clearfix">
 								<label for="university">Institution</label>
-								<input name="university" type="text" id="university"/>
+								<input name="university" type="text" id="university" value="{{obj.data.institution}}"/>
 							</div>
 							<div class="clearfix">
 								<label for="department">Department</label>
-								<input name="department" type="text" id="department"/>
+								<input name="department" type="text" id="department" value="{{obj.data.department}}"/>
 							</div>
 							<div class="clearfix">
-								<label for="normalSelect">Select</label> 
-              					<select name="normalSelect" id="normalSelect"> 
+								<label for="country">Select</label> 
+              					<select name="country" id="country">
 								<option value="">Country...</option>
 <option value="Afganistan">Afghanistan</option>
 <option value="Albania">Albania</option>
@@ -320,13 +322,32 @@
             <button type="submit" class="btn primary">Send</button>&nbsp;<button type="reset" class="btn">Clear</button> 
           </div> 
           						</form>
-						
-						
-		<div class="alert-message error"> 
-        	<a class="close" href="#">&times;</a> 
-        	<strong>Oh snap!</strong> Change this and that and try again.
-        </div> 
-						</p>
+									
+									<!-- message sent modal --> 
+									<div id="modal-sent" class="modal hide fade"> 
+										<div class="modal-header"> 
+											<a href="#" class="close">&times;</a> 
+											<h3>Message Sent</h3> 
+										</div> 
+										<div class="modal-body"> 
+											<p>{{obj.message}}</p> 
+										</div> 
+									</div>
+									
+									<!-- error modal --> 
+									<div id="modal-error" class="modal hide fade"> 
+										<div class="modal-header"> 
+											<a href="#" class="close">&times;</a> 
+											<h3>Please fill out the form</h3> 
+										</div> 
+										<div class="modal-body"> 
+											<p>{{obj.error}}</p> 
+										</div> 
+									</div>
+
+									
+									
+								</p>
       			</div>
       	<div class="span6 columns">
       		<h1>Information</h1>
@@ -356,6 +377,38 @@
       </footer>
 
     </div> <!-- /container -->
+	<script>
+		success = '{{obj.success}}';
+		error = "{{obj.error}}";
+		
+		if(success == 'True') success = true;
+		else success = false;
+		
+		if(success)
+		{
+			$('#modal-sent').modal({
+				closeOnEscape: true,
+				backdrop:true,
+				keyboard:true
+			})
+			$('#modal-sent').modal('show')
+		}
+		else
+		{
+			if(error != '')
+			{
+				$('#modal-error').modal({
+					closeOnEscape: true,
+					backdrop:true,
+					keyboard:true
+				})
+				$('#modal-error').modal('show')
+			}
+			
+		}
+		
+	
+	</script>
 
   </body>
 </html>

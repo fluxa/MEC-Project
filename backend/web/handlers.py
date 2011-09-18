@@ -29,10 +29,10 @@ class WebTheProjectHandler(abstract.BaseHandler):
         self.render_template('web/theproject.html',{})
 
 class WebContactHandler(abstract.BaseHandler):
-    def post(self):
-        self.get()
-
     def get(self):
+        self.render_template('web/contact.html',{})
+
+    def post(self):
         
         name = ''
         email = ''
@@ -44,34 +44,36 @@ class WebContactHandler(abstract.BaseHandler):
         error = ''
         message = ''
         
+        logging.info(self.request)
+        
         if self.request.get('name'):
             name = self.request.get('name')
         else:
-            error += 'Please input your name\r'
+            error += 'Input your <strong>Name</strong><br>'
             success = False
         
         if self.request.get('email'):
             email = self.request.get('email')
         else:
-            error += 'Please input your email'
+            error += 'Input your <strong>Email</strong><br>'
             success = False
         
-        if self.request.get('institution'):
-            institution = self.request.get('institution')
+        if self.request.get('university'):
+            institution = self.request.get('university')
         else:
-            error += 'Please input the name of the institution'
+            error += 'Input the name of the <strong>Institution</strong><br>'
             success = False
         
         if self.request.get('department'):
             department = self.request.get('department')
         else:
-            error += 'Please input the name of the department'
+            error += 'Input the name of the <strong>Department</strong><br>'
             success = False
             
         if self.request.get('country'):
-            department = self.request.get('country')
+            country = self.request.get('country')
         else:
-            error += 'Please input your country'
+            error += 'Select your <strong>Country</strong><br>'
             success = False
         
         if success:
@@ -90,9 +92,17 @@ class WebContactHandler(abstract.BaseHandler):
             
             """)
             
-                
-        
-        self.render_template('web/contact.html',{})
+            message = 'Your message has been sent. We will contact you shortly.'
+            name = ''
+            email = ''
+            institution = ''
+            department = ''
+            country = ''
+            
+            
+        data = {'name':name, 'email':email, 'institution':institution, 'department':department, 'country':country}
+        obj = {'success':success, 'message':message, 'error':error, 'data':data}
+        self.render_template('web/contact.html',{'obj':obj})
         
 class WebMatrixHandler(abstract.BaseHandler):
     def post(self):
