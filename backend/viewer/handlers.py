@@ -46,3 +46,12 @@ class MatrixPlainViewerHandler(abstract.BaseHandler):
             logging.info(csv_data)
             
             self.render_template('viewer/plain.html',{'data':csv_data})
+
+class MatrixRawViewerHandler(abstract.BaseHandler):
+    def get(self):
+        if(self.request.get('key')):
+            key = db.Key(self.request.get('key'))
+            matrix = Matrix.get(key)
+            self.response.headers['Content-Type'] = 'text/csv'
+            self.response.headers['Content-Disposition'] = "attachment; filename="+matrix.filename+".csv"
+            self.response.out.write(str(matrix.data))
