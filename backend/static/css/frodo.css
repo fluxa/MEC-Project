@@ -19,3 +19,9 @@
   background-image: -o-linear-gradient(top, #d6e4df, #ffffff);
   background-image: linear-gradient(top, #d6e4df, #ffffff);
 }
+
+.donate{
+width: 147px;
+height: 47px;
+border: 0px;
+}
