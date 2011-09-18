@@ -33,3 +33,10 @@ class WebContactHandler(abstract.BaseHandler):
 
     def get(self):
         self.render_template('web/contact.html',{})
+        
+class WebMatrixHandler(abstract.BaseHandler):
+    def post(self):
+        self.get()
+
+    def get(self):
+        self.render_template('web/matrix.html',{})

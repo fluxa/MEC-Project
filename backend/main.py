@@ -50,6 +50,7 @@ requests = [
 	('/web/about/', WebAboutHandler),
 	('/web/theproject/', WebTheProjectHandler),
 	('/web/contact/', WebContactHandler),
+	('/web/matrix/', WebMatrixHandler),
 ]
 
 application = webapp.WSGIApplication(requests, debug=True)
