@@ -4,3 +4,18 @@
   height: 200px;
   
 }
+
+.fondo-login {
+  padding: 10px;
+  background-color: #d6e4df;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+    background-image: -khtml-gradient(linear, left top, left bottom, from(#9c9779), to(#ffffff));
+  background-image: -moz-linear-gradient(top, #9c9779, #ffffff);
+  background-image: -ms-linear-gradient(top, #9c9779, #ffffff);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #9c9779), color-stop(100%, #ffffff));
+  background-image: -webkit-linear-gradient(top, #bed1da, #ffffff);
+  background-image: -o-linear-gradient(top, #d6e4df, #ffffff);
+  background-image: linear-gradient(top, #d6e4df, #ffffff);
+}
