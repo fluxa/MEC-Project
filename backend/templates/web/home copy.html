@@ -10,10 +10,7 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    
-	<!-- Le javascripts -->
-	<script src="/js/bootstrap-popover.js"></script>
-	
+
     <!-- Le styles -->
     <link href="/css/bootstrap.css" rel="stylesheet">
     <link href="/css/frodo.css" rel="stylesheet">
@@ -50,33 +47,31 @@
       </div>
       <!-- Example row of columns -->
       <div class="row">
-        <div class="span6 fondo-login">
-          <h2><strong>Welcome Dr. Adolf Zoidberg</strong></h2>
-          <p> Below, you will find your assigned foodwebs</p>
-          <ul>
-          <li><a href="loggeado">Foodweb numero 1</a> </li>
-          <li><a href="loggeado">Foodweb numero 2</a></li></br>
-          <p>Any questions read the instructions</p>
-          </ul>
-          </p>
+        <div class="span6">
+          <h2>Welcome Dr. Zoidberg</h2>
+          <p>
+          Use your email to login the site. If you have any problems <a href="contact/">contact me</a>
+          <form action="/login/" method="POST" enctype="multipart/form-data" class="form-stacked"> 
+				<div class="clearfix"> 
+					<label for="name">Email</label> 
+					<input name="login" type="text" id="login"/> 
+				</div> 
+				<div class="actions"> 
+					<button type="submit" class="btn primary">Login</button> 
+				</div> 
+			  </form>
+		  </p>
         </div>
         <div class="span5">
-          <h2>Instructions</h2>
-          <p>To participate, please register and follow these simple instructions. The site can be used to compile, validate and model ecological networks.</p>
-          <p><a class="btn" data-controls-modal="my-modal" data-backdrop="static" >Launch Modal</a>
-</p>
-          
-          
-          
-          
-          
-        </div>
-        <div class="span4">
           <h2>Donations</h2>
            <p>This project is a first version. We are currently accepting donations to further improve functionality, data handling and web hosting.</p>
           <p><a class="btn" href="http://mecproyecto.appspot.com/web/contact/">View details &raquo;</a></p>
-       </div>        
-        
+       </div>
+        <div class="span5">
+          <h2>Instructions</h2>
+          <p>To participate, please register and follow these simple instructions. The site can be used to compile, validate and model ecological networks.</p>
+          <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
       </div>
       <footer>
         <p>&copy; Bounce 2011</p>
