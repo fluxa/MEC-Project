@@ -82,17 +82,17 @@ class WebContactHandler(abstract.BaseHandler):
             Contact information:
 
             name: [NAME]
-            email = [EMAIL]
-            institution = [INSTITUTION]
-            department = [DEPARTMENT]
-            country = [COUNTRY]
+            email: [EMAIL]
+            institution: [INSTITUTION]
+            department: [DEPARTMENT]
+            country: [COUNTRY]
 
             """
-            body.replace('[NAME]',name)
-            body.replace('[EMAIL]',email)
-            body.replace('[INSTITUTION]',institution)
-            body.replace('[DEPARTMENT]',department)
-            body.replace('[COUNTRY]',country)
+            body = body.replace('[NAME]',name)
+            body = body.replace('[EMAIL]',email)
+            body = body.replace('[INSTITUTION]',institution)
+            body = body.replace('[DEPARTMENT]',department)
+            body = body.replace('[COUNTRY]',country)
             
             mail.send_mail(sender="MCE Contact <juanclaudiolopez@gmail.com>",
                           to="Antonio Tironi <tironi@gmail.com>",
