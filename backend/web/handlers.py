@@ -39,12 +39,12 @@ class WebContactHandler(abstract.BaseHandler):
         institution = ''
         department = ''
         country = ''
+        cmessage = ''
         
         success = True
         error = ''
         message = ''
         
-        logging.info(self.request)
         
         if self.request.get('name'):
             name = self.request.get('name')
@@ -76,6 +76,13 @@ class WebContactHandler(abstract.BaseHandler):
             error += 'Select your <strong>Country</strong><br>'
             success = False
         
+        if self.request.get('message'):
+            cmessage = self.request.get('message')
+        else:
+            error += 'Input a <strong>message</message>'
+            success = False
+            
+        
         if success:
             
             body = """
@@ -86,6 +93,7 @@ class WebContactHandler(abstract.BaseHandler):
             institution: [INSTITUTION]
             department: [DEPARTMENT]
             country: [COUNTRY]
+            message: [MESSAGE]
 
             """
             body = body.replace('[NAME]',name)
@@ -93,6 +101,7 @@ class WebContactHandler(abstract.BaseHandler):
             body = body.replace('[INSTITUTION]',institution)
             body = body.replace('[DEPARTMENT]',department)
             body = body.replace('[COUNTRY]',country)
+            body = body.replace('[MESSAGE]', cmessage)
             
             mail.send_mail(sender="MCE Contact <juanclaudiolopez@gmail.com>",
                           to="Antonio Tironi <tironi@gmail.com>",
@@ -105,9 +114,10 @@ class WebContactHandler(abstract.BaseHandler):
             institution = ''
             department = ''
             country = ''
+            cmessage = ''
             
             
-        data = {'name':name, 'email':email, 'institution':institution, 'department':department, 'country':country}
+        data = {'name':name, 'email':email, 'institution':institution, 'department':department, 'country':country, 'message':cmessage}
         obj = {'success':success, 'message':message, 'error':error, 'data':data}
         self.render_template('web/contact.html',{'obj':obj})
         
