@@ -11,27 +11,22 @@
     Learn more about Flex at http://flex.org 
     // -->
     <head>
-        <title></title>
-        <meta name="google" value="notranslate" />         
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <!-- Include CSS to eliminate any default margins/padding and set the height of the html element and 
-             the body element to 100%, because Firefox, or any Gecko based browser, interprets percentage as 
-             the percentage of the height of its parent container, which has to be set explicitly.  Fix for
-             Firefox 3.6 focus border issues.  Initially, don't display flashContent div so it won't show 
-             if JavaScript disabled.
-        -->
-        <style type="text/css" media="screen"> 
-            html, body  { height:100%; }
-            body { margin:0; padding:0; overflow:auto; text-align:center; 
-                   background-color: #ffffff; }   
-            object:focus { outline:none; }
-            #flashContent { display:none; }
-        </style>
-        
-        
-        <script type="text/javascript" src="/scripts/swfobject.js"></script>
-        <script type="text/javascript" src="/scripts/swffit.js"></script>
-        <script type="text/javascript">
+       <meta charset="utf-8">
+    <title>Proyecto MCE - Matrix Viewer</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+	<!-- Le javascripts -->
+	<script src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+	<script src="/js/bootstrap-modal.js"></script>
+	<script type="text/javascript" src="/scripts/swfobject.js"></script>
+    <script type="text/javascript" src="/scripts/swffit.js"></script>
+    <script type="text/javascript">
             // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
             var swfVersionStr = "10.2.0";
             // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
@@ -41,7 +36,7 @@
             params.quality = "high";
             params.bgcolor = "#ffffff";
             params.allowscriptaccess = "sameDomain";
-            params.allowfullscreen = "true";
+            params.allowfullscreen = "false";
             var attributes = {};
             attributes.id = "MECproject";
             attributes.name = "MECproject";
@@ -53,14 +48,44 @@
                 flashvars, params, attributes);
             // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
             swfobject.createCSS("#flashContent", "display:block;text-align:left;");
-        </script>
-    </head>
-    <body>
-        <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
+      </script>
+
+	
+    <!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/frodo.css" rel="stylesheet">
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png"> 
+           
+        </head>
+<body style='padding: 40px;'>
+<!-- Topbar -->    
+     <div class="topbar">
+      <div class="fill">
+        <div class="container">
+          <h3><a href="#">Project MCE</a></h3>
+          <ul>
+			<li class="active"><a href="#">Home</a></li>
+            <li><a href="about/">About</a></li>
+            <li><a href="theproject/">The Project</a></li>
+            <li><a href="contact/">Contact</a></li>
+            <li class="matrix"><a href="matrix/">Matrix</a></li>
+		  </ul>
+        </div>
+      </div>
+    </div>
+<!-- Topbar -->    
+<div class="container">
+   
+<!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
              JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
              when JavaScript is disabled.
         -->
-        <div id="flashContent">
+
+<div id="flashContent">
             <p>
                 To view this page ensure that Adobe Flash Player version 
                 10.2.0 or greater is installed. 
@@ -70,21 +95,20 @@
                 document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
                                 + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
             </script> 
-        </div>
-        
+</div>
         <noscript>
             <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="MECproject">
                 <param name="movie" value="/swf/app.swf" />
                 <param name="quality" value="high" />
                 <param name="bgcolor" value="#ffffff" />
                 <param name="allowScriptAccess" value="sameDomain" />
-                <param name="allowFullScreen" value="true" />
+                <param name="allowFullScreen" value="false" />
                 <!--[if !IE]>-->
                 <object type="application/x-shockwave-flash" data="/swf/app.swf" width="100%" height="100%">
                     <param name="quality" value="high" />
                     <param name="bgcolor" value="#ffffff" />
                     <param name="allowScriptAccess" value="sameDomain" />
-                    <param name="allowFullScreen" value="true" />
+                    <param name="allowFullScreen" value="false" />
                 <!--<![endif]-->
                 <!--[if gte IE 6]>-->
                     <p> 
@@ -99,6 +123,63 @@
                 </object>
                 <!--<![endif]-->
             </object>
-        </noscript>     
-   </body>
+        </noscript> 
+    
+<!-- Example row of columns -->
+      <div class="row">
+        <div class="span6 fondo-login">
+          <h2><strong>Welcome Dr. Adolf Zoidberg</strong></h2>
+          <p> Below, you will find your assigned foodwebs</p>
+          <ul>
+          <li><a href="loggeado">Foodweb numero 1</a></li>
+          <li><a href="loggeado">Foodweb numero 2</a></li></br>
+          <p>Any questions read the instructions</p>
+          </ul>
+          </p>
+        </div>
+        <div class="span5">
+          <h2>Instructions</h2>
+          <p>To participate, please register and follow these simple instructions. The site can be used to compile, validate and model ecological networks.</p>
+          
+<!-- sample modal content -->
+          <div id="modal-from-dom" class="modal hide fade">
+            <div class="modal-header">
+              <a href="#" class="close">&times;</a>
+              <h3>Instructions Video</h3>
+            </div>
+            <div class="modal-body">
+              <p><iframe src="http://player.vimeo.com/video/28994685?title=0&amp;byline=0&amp;portrait=0" width="530" height="338" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe><p><a href="http://vimeo.com/28994685">Monster Chorus (Promo)</a> from <a href="http://vimeo.com/user8498111">ReignDesign</a> on <a href="http://vimeo.com">Vimeo</a>.</p></p>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+
+          <button data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true" class="btn">View Video</button>
+        </div>
+        <div class="span4">
+          <h2>Donations</h2>
+           <p>This project is a first version. We are currently accepting donations to further improve functionality, data handling and 			web hosting.</p>
+          
+			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+			<input type="hidden" name="cmd" value="_donations">
+			<input type="hidden" name="business" value="juanclaudiolopez@gmail.com">
+			<input type="hidden" name="lc" value="US">
+			<input type="hidden" name="item_name" value="Mapping World Ecosystems">
+			<input type="hidden" name="no_note" value="0">
+			<input type="hidden" name="currency_code" value="USD">
+			<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+			<input type="image" class="donate" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"  border="0" 					name="submit" alt="PayPal - The safer, easier way to pay online!">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>
+		</div>
+         
+       </div><!-- /rows -->
+
+  <footer>
+       <p>&copy; Bounce 2011</p>
+  </footer>
+	
+</div> <!-- /container -->
+
+</body>
 </html>
