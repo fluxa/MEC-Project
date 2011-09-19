@@ -6,13 +6,42 @@ import logging
 from datetime import *
 from models import *
 from google.appengine.api import mail
+from gaesessions import get_current_session
 
 class WebHomeHandler(abstract.BaseHandler):
     def post(self):
         self.get()
         
     def get(self):
-        self.render_template('web/home.html',{})
+        #check if it needs logout
+        if self.request.get('logout'):
+            session = get_current_session()
+            if session.is_active():
+                session.terminate()
+        
+        professor = None
+        links = []
+        
+        #check if has user data
+        if self.request.get('key_name'):
+            professor = Professor.get_by_key_name(self.request.get('key_name'))
+            
+        if professor:
+            # close any active session the user has since he is trying to login
+            session = get_current_session()
+            if session.is_active():
+                session.terminate()
+            
+            #start new session
+            session['user'] = professor
+        
+        session = get_current_session()
+        if session.is_active():
+            professor = session['user']
+            links = Link.all().filter('professor =', professor).fetch(100)
+            self.render_template('web/home_logged.html',{'professor':professor,'links':links})
+        else:
+            self.render_template('web/home.html',{})
         
 class WebAboutHandler(abstract.BaseHandler):
     def post(self):

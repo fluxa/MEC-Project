@@ -48,6 +48,10 @@
 								<input name="name" type="text" id="name"/>
 							</div>
 							<div class="clearfix">
+								<label for="name">Email</label>
+								<input name="email" type="text" id="email"/>
+							</div>
+							<div class="clearfix">
 								<label for="field">Field</label>
 								<input name="field" type="text" id="field"/>
 							</div>
@@ -77,6 +81,7 @@
 							<thead>
 								<tr>
 									<th>Name</th>
+									<th>Email</th>
 									<th>Field</th>
 									<th>Institution</th>
 									<th>Department</th>
@@ -87,6 +92,7 @@
 								{%for professor in professors %}
 								<tr>
 									<td>{{professor.name}}</td>
+									<td>{{professor.email}}</td>
 									<td>{{professor.field}}</td>
 									<td>{{professor.university}}</td>
 									<td>{{professor.department}}</td>

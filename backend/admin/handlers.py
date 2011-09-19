@@ -33,16 +33,18 @@ class AdminProfessorAddHandler(abstract.BaseHandler):
     
     def post(self):
         
-        if self.request.get('name') != "":
+        if self.request.get('name') != "" and self.request.get('email') != "":
             
             name = self.request.get('name')
+            email = self.request.get('email')
             field = self.request.get('field')
             university = self.request.get('university')
             department = self.request.get('department')
             country = self.request.get('country')
             
-            professor = Professor()
+            professor = Professor(key_name=email)
             professor.name = name
+            professor.email = email
             professor.field = field
             professor.university = university
             professor.department = department

@@ -2,6 +2,7 @@ from google.appengine.ext import db
 
 class Professor(db.Model):
     name = db.TextProperty()
+    email = db.TextProperty()
     field = db.TextProperty()
     university = db.TextProperty()
     department = db.TextProperty()

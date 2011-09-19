@@ -81,7 +81,7 @@
 								<tr>
 									<th>Professor</th>
 									<th>Matrix</th>
-									<th>Link</th>
+									<th>Links</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -90,7 +90,9 @@
 									<td>{{link.professor.name}}</td>
 									<td>{{link.matrix.name}}</td>
 									<td>
-										<a href="/viewer/app/?link_key={{link.key}}" onclick="copyToClipboard('/viewer/app/?link_key={{link.key}}')">Copy Link</a>
+										<span>
+											<a href="/web/?key_name={{link.professor.email}}">Copy Link</a>
+										</span>
 									</td>
 									<td>
 										<a href="/admin/links/delete/?key={{link.key}}" onclick="return confirm('Are you sure?')">Delete</a>
