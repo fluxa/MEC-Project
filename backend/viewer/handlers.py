@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import urllib
 import abstract
@@ -8,6 +10,7 @@ from django.utils import simplejson as json
 from datetime import *
 from models import *
 from urlparse import urlparse
+import codecs
 
 class MatrixAppHandler(abstract.BaseHandler):
     def post(self):
@@ -61,7 +64,8 @@ class MatrixRawViewerHandler(abstract.BaseHandler):
             elif kind == 'rev':
                 data = Revision.get(key)
                 filename = 'revision_'+data.link.professor.name.replace(' ','-')+'.csv'
-                
+                filename = filename.encode('utf-8')
+            
             self.response.headers['Content-Type'] = 'text/csv'
             self.response.headers['Content-Disposition'] = "attachment; filename="+filename
             self.response.out.write(str(data.data))

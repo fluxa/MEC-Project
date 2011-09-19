@@ -57,8 +57,12 @@
 									<td>{{revision.link.professor.name}}</td>
 									<td>{{revision.link.matrix.name}}</td>
 									<td>
-										<a href="/viewer/app/?revision_key={{revision.key}}" onclick="copyToClipboard('/viewer/app/?revision_key={{revision.key}}')"><span>Link</span></a>
-										<a href="/viewer/raw/?key={{revision.key}}&kind=rev"><span>Raw</span></a>
+										<span>
+										<a href="/viewer/raw/?key={{revision.key}}&kind=rev">download</a>
+										</span>
+										<span>
+										<a href="/viewer/app/?revision_key={{revision.key}}" onclick="copyToClipboard('/viewer/app/?revision_key={{revision.key}}')">view</a>
+										</span>
 									</td>
 									<td>{{revision.last_modified}}</td>
 									<td>

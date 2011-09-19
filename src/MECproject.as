@@ -143,7 +143,7 @@ package
 			}
 			
 			topBar = new TopBar();
-			addChild(topBar);
+			//addChild(topBar);
 			
 			var data:String = DataUtils.CSVtoJson(UserInfo.instance().data.matrix.data);
 			_nview = new NetworkView(data, new Rectangle(margin,topBar.h+margin,stage.stageWidth-margin*2,stage.stageHeight-(topBar.h+margin)),topBar);
