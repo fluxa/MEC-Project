@@ -43,11 +43,11 @@
             attributes.align = "middle";
             swfobject.embedSWF(
                 "/swf/app.swf", "flashContent", 
-                "100%", "100%", 
+                "900px", "650px", 
                 swfVersionStr, xiSwfUrlStr, 
                 flashvars, params, attributes);
             // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
-            swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+            swfobject.createCSS("#flashContent", "display:block;");
       </script>
 
 	
@@ -78,13 +78,12 @@
       </div>
     </div>
 <!-- Topbar -->    
-<div class="container">
-   
+<div class="container-fluid" style="padding-left:100px;">   
 <!-- SWFObject's dynamic embed method replaces this alternative HTML content with Flash content when enough 
              JavaScript and Flash plug-in support is available. The div is initially hidden so that it doesn't show
              when JavaScript is disabled.
         -->
-
+<div class="flasher">
 <div id="flashContent">
             <p>
                 To view this page ensure that Adobe Flash Player version 
@@ -95,7 +94,9 @@
                 document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
                                 + pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
             </script> 
-</div>
+    </div><!-- End of Flashers -->
+
+         
         <noscript>
             <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" width="100%" height="100%" id="MECproject">
                 <param name="movie" value="/swf/app.swf" />
@@ -124,56 +125,8 @@
                 <!--<![endif]-->
             </object>
         </noscript> 
-    
-<!-- Example row of columns -->
-      <div class="row">
-        <div class="span6 fondo-login">
-          <h2><strong>Welcome Dr. Adolf Zoidberg</strong></h2>
-          <p> Below, you will find your assigned foodwebs</p>
-          <ul>
-          <li><a href="loggeado">Foodweb numero 1</a></li>
-          <li><a href="loggeado">Foodweb numero 2</a></li></br>
-          <p>Any questions read the instructions</p>
-          </ul>
-          </p>
-        </div>
-        <div class="span5">
-          <h2>Instructions</h2>
-          <p>To participate, please register and follow these simple instructions. The site can be used to compile, validate and model ecological networks.</p>
-          
-<!-- sample modal content -->
-          <div id="modal-from-dom" class="modal hide fade">
-            <div class="modal-header">
-              <a href="#" class="close">&times;</a>
-              <h3>Instructions Video</h3>
-            </div>
-            <div class="modal-body">
-              <p><iframe src="http://player.vimeo.com/video/28994685?title=0&amp;byline=0&amp;portrait=0" width="530" height="338" frameborder="0" webkitAllowFullScreen allowFullScreen></iframe><p><a href="http://vimeo.com/28994685">Monster Chorus (Promo)</a> from <a href="http://vimeo.com/user8498111">ReignDesign</a> on <a href="http://vimeo.com">Vimeo</a>.</p></p>
-            </div>
-            <div class="modal-footer">
-            </div>
-          </div>
+</div>   
 
-          <button data-controls-modal="modal-from-dom" data-backdrop="true" data-keyboard="true" class="btn">View Video</button>
-        </div>
-        <div class="span4">
-          <h2>Donations</h2>
-           <p>This project is a first version. We are currently accepting donations to further improve functionality, data handling and 			web hosting.</p>
-          
-			<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-			<input type="hidden" name="cmd" value="_donations">
-			<input type="hidden" name="business" value="juanclaudiolopez@gmail.com">
-			<input type="hidden" name="lc" value="US">
-			<input type="hidden" name="item_name" value="Mapping World Ecosystems">
-			<input type="hidden" name="no_note" value="0">
-			<input type="hidden" name="currency_code" value="USD">
-			<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
-			<input type="image" class="donate" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"  border="0" 					name="submit" alt="PayPal - The safer, easier way to pay online!">
-			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-			</form>
-		</div>
-         
-       </div><!-- /rows -->
 
   <footer>
        <p>&copy; Bounce 2011</p>
