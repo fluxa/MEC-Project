@@ -69,8 +69,16 @@ package cn.bounce
 		
 		public function destroy():void
 		{
-			removeChild(label);
-			removeChild(indicator);
+			if(label != null)
+			{
+				removeChild(label);
+			}
+			
+			if(indicator != null)
+			{
+				removeChild(indicator);
+			}
+			
 			label = null;
 			indicator = null;
 		}

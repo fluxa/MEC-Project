@@ -137,7 +137,7 @@ package
 			
 			if(topBar)
 			{
-				removeChild(topBar);
+				//removeChild(topBar);
 				topBar.destroy();
 				topBar = null;
 			}
